@@ -18,7 +18,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); 
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsq(builder.Configuration.GetConnectionString("DefaultConnection"))); 
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))); 
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => { options.Password.RequiredLength = 6; options.Password.RequireNonAlphanumeric = false; }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 

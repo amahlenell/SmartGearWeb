@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aeda519e-dd36-418f-bc7f-3de06e1d7162")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartGearWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2da96fa78464c08a67e73406f56418cd1f4e9e1")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartGearWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartGearWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,52 @@
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.smartgear-navbar {
+  background-color: #0f2537;
+}
+.smartgear-navbar .navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.brand-accent {
+  color: #1d9a8f;
+}
+
+.btn-accent {
+  background-color: #1d9a8f;
+  border-color: #1d9a8f;
+  color: #fff;
+}
+.btn-accent:hover {
+  background-color: #157f75;
+  border-color: #157f75;
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #1d9a8f;
+  border-color: #1d9a8f;
+}
+.btn-primary:hover {
+  background-color: #157f75;
+  border-color: #157f75;
+}
+
+.table th {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: #555;
+}
+
+.low-stock-alert {
+  margin-top: 1rem;
+}
+
+@media (max-width: 576px) {
+  .smartgear-navbar .navbar-brand {
+    font-size: 1.1rem;
+  }
+}

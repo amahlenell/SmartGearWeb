@@ -1,0 +1,7 @@
+@model int
+@{
+    var isLow = Model <= 5;
+}
+<span class="badge @(isLow ? "bg-danger" : "bg-success")">
+    @(isLow ? $"Low stock ({Model} left)" : $"In stock ({Model})")
+</span>

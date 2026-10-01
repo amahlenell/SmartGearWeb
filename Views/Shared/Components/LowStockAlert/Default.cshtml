@@ -1,0 +1,8 @@
+@model int
+@if (Model > 0)
+{
+    <div class="alert alert-warning alert-dismissible fade show low-stock-alert" role="alert">
+        <strong>Heads up:</strong> @Model product@(Model == 1 ? "" : "s") running low on stock.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}

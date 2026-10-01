@@ -1,0 +1,65 @@
+// SmartGearWeb custom styling — SASS source, compiled to wwwroot/css/site.css by Gulp
+
+$sg-navy: #0f2537;
+$sg-teal: #1d9a8f;
+$sg-teal-dark: #157f75;
+
+body {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+// Navigation bar
+.smartgear-navbar {
+    background-color: $sg-navy;
+
+    .navbar-brand {
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+}
+
+.brand-accent {
+    color: $sg-teal;
+}
+
+// Styled buttons, used across Create/Edit/Delete views and the navbar
+.btn-accent {
+    background-color: $sg-teal;
+    border-color: $sg-teal;
+    color: #fff;
+
+    &:hover {
+        background-color: $sg-teal-dark;
+        border-color: $sg-teal-dark;
+        color: #fff;
+    }
+}
+
+.btn-primary {
+    background-color: $sg-teal;
+    border-color: $sg-teal;
+
+    &:hover {
+        background-color: $sg-teal-dark;
+        border-color: $sg-teal-dark;
+    }
+}
+
+// Product table
+.table th {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: #555;
+}
+
+.low-stock-alert {
+    margin-top: 1rem;
+}
+
+// Responsive tweak for small screens, demonstrating SASS media query nesting
+@media (max-width: 576px) {
+    .smartgear-navbar .navbar-brand {
+        font-size: 1.1rem;
+    }
+}

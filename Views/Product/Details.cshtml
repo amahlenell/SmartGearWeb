@@ -1,0 +1,31 @@
+@model SmartGearWeb.Models.Product
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h1>@Model.Name</h1>
+
+@if (!string.IsNullOrEmpty(Model.ImageUrl))
+{
+    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid mb-3" style="max-width: 300px;" />
+}
+
+<dl class="row">
+    <dt class="col-sm-2">Category</dt>
+    <dd class="col-sm-10">@Model.Category?.Name</dd>
+
+    <dt class="col-sm-2">Price (excl. VAT)</dt>
+    <dd class="col-sm-10">@Model.Price.ToString("C")</dd>
+
+    <dt class="col-sm-2">Price (incl. VAT)</dt>
+    <dd class="col-sm-10">@Model.GetPriceIncludingVat().ToString("C")</dd>
+
+    <dt class="col-sm-2">Description</dt>
+    <dd class="col-sm-10">@Model.Description</dd>
+
+    <dt class="col-sm-2">Stock</dt>
+    <dd class="col-sm-10">@await Component.InvokeAsync("StockStatus", new { stockQuantity = Model.StockQuantity })</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+<a asp-action="Index" class="btn btn-outline-secondary">Back to list</a>

@@ -1,0 +1,19 @@
+@model SmartGearWeb.Models.Product
+
+<tr>
+    <td>
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" alt="@Model.Name" style="width: 48px; height: 48px; object-fit: cover; border-radius: 4px;" />
+        }
+    </td>
+    <td>@Model.Name</td>
+    <td>@Model.Category?.Name</td>
+    <td>@Model.Price.ToString("C")</td>
+    <td>@await Component.InvokeAsync("StockStatus", new { stockQuantity = Model.StockQuantity })</td>
+    <td>
+        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-primary">Details</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+    </td>
+</tr>

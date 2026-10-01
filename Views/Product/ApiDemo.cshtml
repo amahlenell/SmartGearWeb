@@ -1,0 +1,113 @@
+@{
+    ViewData["Title"] = "Product API Demo";
+}
+
+<h1>Product API Demo</h1>
+<p>This page talks only to <code>/api/products</code> using jQuery AJAX — it never posts to an MVC form action directly.</p>
+
+<div class="row">
+    <div class="col-md-5">
+        <h4>Add a product via the API</h4>
+        <form id="api-create-form">
+            <div class="mb-2">
+                <input type="text" id="api-name" class="form-control" placeholder="Name" required />
+            </div>
+            <div class="mb-2">
+                <input type="number" step="0.01" id="api-price" class="form-control" placeholder="Price" required />
+            </div>
+            <div class="mb-2">
+                <input type="number" id="api-category" class="form-control" placeholder="Category Id (e.g. 1, 2, 3)" required />
+            </div>
+            <div class="mb-2">
+                <input type="number" id="api-stock" class="form-control" placeholder="Stock Quantity" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Create via API</button>
+        </form>
+        <div id="api-message" class="mt-2"></div>
+    </div>
+
+    <div class="col-md-7">
+        <h4>Products (loaded via GET /api/products)</h4>
+        <table class="table" id="api-product-table">
+            <thead>
+                <tr><th>Name</th><th>Price</th><th>Stock</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            loadProducts();
+
+            function loadProducts() {
+                $.getJSON('/api/products', function (products) {
+                    var $tbody = $('#api-product-table tbody').empty();
+                    products.forEach(function (p) {
+                        var $row = $('<tr>').append(
+                            $('<td>').text(p.name),
+                            $('<td>').text('R' + p.price.toFixed(2)),
+                            $('<td>').text(p.stockQuantity),
+                            $('<td>').append(
+                                $('<button>').addClass('btn btn-sm btn-outline-danger').text('Delete')
+                                    .on('click', function () { deleteProduct(p.id); })
+                            )
+                        );
+                        $tbody.append($row);
+                    });
+                }).fail(function () {
+                    showMessage('Failed to load products from the API.', 'danger');
+                });
+            }
+
+            $('#api-create-form').on('submit', function (e) {
+                e.preventDefault();
+
+                var payload = {
+                    name: $('#api-name').val(),
+                    description: '',
+                    price: parseFloat($('#api-price').val()),
+                    categoryId: parseInt($('#api-category').val(), 10),
+                    stockQuantity: parseInt($('#api-stock').val(), 10)
+                };
+
+                $.ajax({
+                    url: '/api/products',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(payload),
+                    success: function () {
+                        showMessage('Product created via API.', 'success');
+                        $('#api-create-form')[0].reset();
+                        loadProducts();
+                    },
+                    error: function (xhr) {
+                        showMessage('Create failed: ' + xhr.status + ' ' + xhr.statusText, 'danger');
+                    }
+                });
+            });
+
+            function deleteProduct(id) {
+                if (!confirm('Delete this product via the API?')) return;
+
+                $.ajax({
+                    url: '/api/products/' + id,
+                    method: 'DELETE',
+                    success: function () {
+                        showMessage('Product deleted via API.', 'success');
+                        loadProducts();
+                    },
+                    error: function (xhr) {
+                        showMessage('Delete failed: ' + xhr.status + ' ' + xhr.statusText, 'danger');
+                    }
+                });
+            }
+
+            function showMessage(text, type) {
+                $('#api-message').html('<div class="alert alert-' + type + '">' + text + '</div>');
+            }
+        });
+    </script>
+}
